@@ -32,13 +32,6 @@ class Im3xWidget {
 	
 	//渲染中尺寸组件
 	async renderMedium () {
-		let w = new ListWidget()
-		w.addText("暂不支持该尺寸组件")
-		return w
-	}
-	
-	//渲染大尺寸组件
-	async renderLarge () {
 		let result = await this.getData()
 		let w = new ListWidget()
 		if(result.status !== 0){
@@ -63,6 +56,13 @@ class Im3xWidget {
 			utTxt.centerAlignText()
 			utTxt.textOpacity = 0.5
 		} 
+		return w
+	}
+	
+	//渲染大尺寸组件
+	async renderLarge () {
+		let w = new ListWidget()
+		w.addText("暂不支持该尺寸组件")
 		return w
 	}
 
