@@ -90,7 +90,7 @@ class Im3xWidget {
 
 	//加载数据
 	async getData () {
-		let api = 'https://yunxiaozhi.cn/v1/public/capi/widget/yxz'
+		let api = 'http://yunxiaozhi.cn/v1/public/capi/widget/yxz'
 		let req = new Request(api)
 		let res = await req.loadJSON()
 		return res
