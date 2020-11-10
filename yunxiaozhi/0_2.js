@@ -15,7 +15,7 @@ class Im3xWidget {
 	//渲染组件
 	async render () {
 		if (this.widgetSize === 'medium') {
-			return await this.renderSmall()
+			return await this.renderMedium()
 		} else if (this.widgetSize === 'large') {
 			return await this.renderLarge()
 		} else {
@@ -38,24 +38,24 @@ class Im3xWidget {
 			var flTxt = w.addText('数据获取失败')
 			flTxt.textColor = new Color("#fb7299")
 			flTxt.font = Font.systemFont(14)
-			return w
+		}else{
+			w = await this.renderHeader(w, data.icon, data.title, false)
+			let data = result.data
+			let rowLen = 4
+			let boxs = w.addStack();
+			for (var i = 0; i < rowLen; i++) {
+				let box = boxs.addStack();
+				var flTxt = box.addText(this.toThousands(data[i]['value']))
+				flTxt.textColor = new Color("#fb7299")
+				flTxt.font = Font.boldRoundedSystemFont(this.getFontsize(data[i]['value']))
+				flTxt.centerAlignText()
+				box.addSpacer(20)
+				let utTxt = box.addText(data[i]['title'])
+				utTxt.font = Font.systemFont(12)
+				utTxt.centerAlignText()
+				utTxt.textOpacity = 0.5
+			} 
 		}
-		w = await this.renderHeader(w, data.icon, data.title, false)
-		let data = result.data
-		let rowLen = 4
-		let boxs = w.addStack();
-		for (var i = 0; i < rowLen; i++) {
-			let box = boxs.addStack();
-			var flTxt = box.addText(this.toThousands(data[i]['value']))
-			flTxt.textColor = new Color("#fb7299")
-			flTxt.font = Font.boldRoundedSystemFont(this.getFontsize(data[i]['value']))
-			flTxt.centerAlignText()
-			box.addSpacer(20)
-			let utTxt = box.addText(data[i]['title'])
-			utTxt.font = Font.systemFont(12)
-			utTxt.centerAlignText()
-			utTxt.textOpacity = 0.5
-		} 
 		return w
 	}
 	
@@ -67,24 +67,24 @@ class Im3xWidget {
 			var flTxt = w.addText('数据获取失败')
 			flTxt.textColor = new Color("#fb7299")
 			flTxt.font = Font.systemFont(14)
-			return w
+		}else{
+			w = await this.renderHeader(w, data.icon, data.title, false)
+			let data = result.data
+			let rowLen = 4
+			let boxs = w.addStack();
+			for (var i = 0; i < rowLen; i++) {
+				let box = boxs.addStack();
+				var flTxt = box.addText(this.toThousands(data[i]['value']))
+				flTxt.textColor = new Color("#fb7299")
+				flTxt.font = Font.boldRoundedSystemFont(this.getFontsize(data[i]['value']))
+				flTxt.centerAlignText()
+				box.addSpacer(20)
+				let utTxt = box.addText(data[i]['title'])
+				utTxt.font = Font.systemFont(12)
+				utTxt.centerAlignText()
+				utTxt.textOpacity = 0.5
+			} 
 		}
-		w = await this.renderHeader(w, data.icon, data.title, false)
-		let data = result.data
-		let rowLen = 4
-		let boxs = w.addStack();
-		for (var i = 0; i < rowLen; i++) {
-			let box = boxs.addStack();
-			var flTxt = box.addText(this.toThousands(data[i]['value']))
-			flTxt.textColor = new Color("#fb7299")
-			flTxt.font = Font.boldRoundedSystemFont(this.getFontsize(data[i]['value']))
-			flTxt.centerAlignText()
-			box.addSpacer(20)
-			let utTxt = box.addText(data[i]['title'])
-			utTxt.font = Font.systemFont(12)
-			utTxt.centerAlignText()
-			utTxt.textOpacity = 0.5
-		} 
 		return w
 	}
 
@@ -93,7 +93,7 @@ class Im3xWidget {
 		let api = 'http://yunxiaozhi.cn/v1/public/capi/widget/yxz'
 		let req = new Request(api)
 		let res = await req.loadJSON()
-		return res
+		return JSON.parse(res)
 	}
   
 	//加载远程图片
@@ -177,7 +177,7 @@ class Im3xWidget {
 module.exports = Im3xWidget
 
 // 如果是在编辑器内编辑、运行、测试，则取消注释这行，便于调试：
-// await new Im3xWidget().test()
+await new Im3xWidget().test()
 
 // 如果是组件单独使用（桌面配置选择这个组件使用，则取消注释这一行：
-//await new Im3xWidget(args.widgetParameter).init()
+// await new Im3xWidget(args.widgetParameter).init()
